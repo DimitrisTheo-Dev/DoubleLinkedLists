@@ -17,8 +17,8 @@ void searchWithFullName(struct Node **head, char *fullName) {
             break;
         }
     }
-
     printf("%s does not exist in the list\n", fullName);
+    free(current);
 }
 
 void searchWithId(struct Node **head, int key) {
@@ -42,5 +42,6 @@ void searchWithId(struct Node **head, int key) {
     }
 
     printf("%d does not exist in the list\n", key);
+    free(current);
 }
 

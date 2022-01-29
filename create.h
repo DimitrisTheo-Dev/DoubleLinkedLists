@@ -1,21 +1,28 @@
-void push(struct Node **head, int am, int semester, char *fullName) {
-    /* 1. allocate node */
-    struct Node *new_node = (struct Node *) malloc(sizeof(struct Node));
+struct Student {
+    int am;
+    char fullName[20];
+    int semester;
+};
 
-    /* 2. put in the data  */
-    new_node->data.am = am;
-    new_node->data.semester = semester;
-    new_node->data.fullName = fullName;
+struct Node {
+    struct Student data;
+    struct Node *next;
+    struct Node *prev;
+};
 
-    /* 3. Make next of new node as head and previous as NULL */
-    new_node->next = (*head);
-    new_node->prev = NULL;
+void push(struct Node **head, int am, int semester, char fullName[20]) {
+    struct Node *newNode = (struct Node *) malloc(sizeof(struct Node));
 
-    /* 4. change prev of head node to new node */
+    newNode->data.am = am;
+    newNode->data.semester = semester;
+    strcpy(newNode->data.fullName, fullName);
+    newNode->next = (*head);
+    newNode->prev = NULL;
+
     if ((*head) != NULL) {
-        (*head)->prev = new_node;
+        (*head)->prev = newNode;
     }
 
-    /* 5. move the head to point to the new node */
-    (*head) = new_node;
+    (*head) = newNode;
+    
 }

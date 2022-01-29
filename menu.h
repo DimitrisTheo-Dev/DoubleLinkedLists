@@ -2,8 +2,7 @@ int GetOption(void) {
     int option;
     printf("Your option: ");
     scanf("%d", &option);
-
-    while (option < 1 || option > 8) {
+    while (option < 1 || option > 9) {
         printf("Wrong option try again.\n");
         printf("Your option: ");
         scanf("%d", &option);

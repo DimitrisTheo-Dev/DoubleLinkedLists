@@ -1,18 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-struct Student {
-    int am;
-    char *fullName;
-    int semester;
-};
-
-struct Node {
-    struct Student data;
-    struct Node *next;
-    struct Node *prev;
-};
-
 #include "create.h"
 #include "delete.h"
 #include "traverse.h"
@@ -23,9 +11,10 @@ struct Node {
 
 int main(void) {
     struct Node *head = NULL;
+    struct Node *newHead = NULL;
     int option = Menu();
-    char fullName;
-    int specificSemester, am, semester, searchId;
+    char fullName[20];
+    int specificSemester, searchSemester, am, semester, searchId;
     while (option != 9) {
         switch (option) {
             case 1:
@@ -38,8 +27,8 @@ int main(void) {
                     scanf("%d", &semester);
                 } while (semester <= 0);
                 printf("Enter student full name: ");
-                scanf("%s", &fullName);
-                push(&head, am, semester, &fullName);
+                scanf("%s", fullName);
+                push(&head, am, semester, fullName);
                 break;
             case 2:
                 printf("Enter student id: ");
@@ -78,20 +67,34 @@ int main(void) {
                 changeCredentials(head, changeAttribute);
                 break;
             case 6:
-                printf("\nCreate a list of students of a specific semester\n");
+                do {
+                    printf("Enter specific semester: ");
+                    scanf("%d", &specificSemester);
+                } while (specificSemester <= 0 || checkSemester(&newHead, specificSemester) == 1);
+                do {
+                    printf("Enter student id: ");
+                    scanf("%d", &am);
+                } while (checkDuplicateId(&head, am) == 1 || checkDuplicateId(&newHead, am) == 1);
+                
+                printf("Enter student full name: ");
+                scanf("%s",fullName);
+                push(&newHead, am, specificSemester, fullName);
+                push(&head, am, specificSemester, fullName);
                 break;
             case 7:
-                traverse(head, printAllStudents);
+                traverse(&head, printAllStudents);
                 break;
             case 8:
                 do {
                     printf("Enter semester: ");
-                    scanf("%d", &specificSemester);
-                } while (specificSemester <= 0);
-                printAllStudentsFromSpecificSemester(head, specificSemester);
+                    scanf("%d", &searchSemester);
+                } while (searchSemester <= 0);
+                printAllStudentsFromSpecificSemester(head, searchSemester);
                 break;
         }
         option = Menu();
     }
+    free(newHead);
+    free(head);
     printf("Goodbye!\n");
 }

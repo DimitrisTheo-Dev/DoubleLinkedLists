@@ -6,4 +6,5 @@ void traverse(struct Node **head, void (*f)(struct Node *))
         f (temp);
         temp = temp->next;
     }
+    free(temp);
 }
