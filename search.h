@@ -1,4 +1,4 @@
-void searchWithFullName(struct Node **head, char *fullName) {
+void searchWithFullName(struct Node **head, char *firstName, char *lastName) {
     struct Node *current = *head;
     if (current == NULL) {
         printf("The student list is empty\n");
@@ -6,8 +6,8 @@ void searchWithFullName(struct Node **head, char *fullName) {
     }
 
     while (current != NULL) {
-        if (current->data.fullName == fullName || strcmp(current->data.fullName, fullName) == 0) {
-            printf("Found student %s at semester %d with id %d\n", current->data.fullName, current->data.semester,
+        if ((current->data.firstName == firstName || strcmp(current->data.firstName, firstName) == 0) && (current->data.lastName == lastName || strcmp(current->data.lastName, lastName) == 0)) {
+            printf("Found student %s %s at semester %d with id %d\n", current->data.firstName, current->data.lastName, current->data.semester,
                    current->data.am);
             return;
         }
@@ -17,8 +17,8 @@ void searchWithFullName(struct Node **head, char *fullName) {
             break;
         }
     }
-    printf("%s does not exist in the list\n", fullName);
-    free(current);
+    printf("%s %s does not exist in the list\n", firstName, lastName);
+    
 }
 
 void searchWithId(struct Node **head, int key) {
@@ -30,7 +30,7 @@ void searchWithId(struct Node **head, int key) {
 
     while (current != NULL) {
         if (current->data.am == key) {
-            printf("Found student %s at semester %d with id %d\n", current->data.fullName, current->data.semester,
+            printf("Found student %s %s at semester %d with id %d\n", current->data.firstName, current->data.lastName, current->data.semester,
                    current->data.am);
             return;
         }
@@ -42,6 +42,6 @@ void searchWithId(struct Node **head, int key) {
     }
 
     printf("%d does not exist in the list\n", key);
-    free(current);
+    
 }
 

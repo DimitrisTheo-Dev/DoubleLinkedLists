@@ -14,7 +14,6 @@ int checkIfExists(struct Node **head, int am) {
             break;
         }
     }
-    free(current);
     return 0;
 }
 
@@ -31,10 +30,11 @@ int checkSemester(struct Node **head, int key) {
         if (current->next != NULL) {
             current = current->next;
         } else {
+            
             break;
         }
     }
-    free(current);
+
     return 0;
 }
 
@@ -54,12 +54,13 @@ int checkDuplicateId(struct Node **head, int key) {
             break;
         }
     }
-//    free(current);
     return 0;
 }
 
 void changeCredentials(struct Node *node, int option) {
-    char newFullName[20];
+    char newFirstName[20];
+    char newLastName[20];
+
     int newSemester, newAm;
     switch (option) {
         case 1:
@@ -73,13 +74,16 @@ void changeCredentials(struct Node *node, int option) {
             do {
                 printf("Enter new semester: ");
                 scanf("%d", &newSemester);
-            } while (newSemester <= 0);
+            } while (newSemester <= 0 || newSemester > 10);
             node->data.semester = newSemester;
             break;
         case 3:
-            printf("Enter new full name: ");
-            scanf("%s", newFullName);
-            strcpy(node->data.fullName, newFullName);
+            printf("Enter new first name: ");
+            scanf("%s", newFirstName);
+            printf("Enter new last name: ");
+            scanf("%s", newLastName);
+            strcpy(node->data.firstName, newFirstName);
+            strcpy(node->data.lastName, newLastName);
             break;
     }
 }

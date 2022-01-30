@@ -6,6 +6,7 @@ void deleteStudent(struct Node **head, int key) {
     }
     if (temp->data.am == key) {
         *head = temp->next;
+        printf("\nStudent with id: %d has been deleted!\n", key);
         free(temp);
         return;
     }

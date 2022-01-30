@@ -5,7 +5,7 @@ void printAllStudentsFromSpecificSemester(struct Node *node, int semester) {
         if (node->data.semester == semester) {
             index++;
             printf("%d:", index);
-            printf(" %s | ", node->data.fullName);
+            printf(" %s %s | ", node->data.firstName, node->data.lastName);
             printf("%d | ", node->data.am);
             printf("%d \n", node->data.semester);
         }
@@ -18,18 +18,10 @@ void printAllStudentsFromSpecificSemester(struct Node *node, int semester) {
 }
 
 void printAllStudents(struct Node *node) {
-    printf("\nPrinting all students: \n");
-    int index = 0;
-    while (node != NULL) {
-        index++;
-        printf("%d:", index);
-        printf(" %s | ", node->data.fullName);
+    if (node != NULL) {
+        printf(" %s %s | ", node->data.firstName, node->data.lastName);
         printf("%d | ", node->data.am);
-        printf("%d \n", node->data.semester);
-        node = node->next;
-    }
-    if (index == 0) {
-        printf("No students found!\n");
+        printf("%d", node->data.semester);
     }
     printf("\n======================\n");
 }
